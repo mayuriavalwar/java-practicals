@@ -3,7 +3,7 @@ public class sy2024bit052 {
         public class Pattern {
     public static void main(String[] args) {
 
-        int n = 4;   // you can change n value
+        int n = 4; 
 
         for (int i = 1; i <= n; i++) {
             for (int j = 1; j <= (2 * n - 1); j++) {
@@ -82,3 +82,4 @@ public void pattern5() {
         System.out.println();
     }
 }
+
