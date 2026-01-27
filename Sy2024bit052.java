@@ -1,4 +1,4 @@
-public class sy2024bit052 {
+public class Sy2024bit052 {
  public void pattern1 () {
         public class Pattern {
     public static void main(String[] args) {
@@ -82,4 +82,5 @@ public void pattern5() {
         System.out.println();
     }
 }
+
 
