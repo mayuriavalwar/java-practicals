@@ -1,0 +1,53 @@
+import java.io.*;
+
+class MyException extends Exception {
+    MyException(String msg) {
+        super(msg);
+    }
+}
+
+public class AllExceptionDemo {
+
+    static void checkFile() throws IOException {
+        FileReader file = new FileReader("abc.txt");
+    }
+
+    public static void main(String[] args) {
+
+        try{
+            int a = 10, b = 0;
+            int c = a / b;
+
+            int arr[] = {1, 2, 3};
+            System.out.println(arr[5]);
+
+            String str = null;
+            System.out.println(str.length());
+
+            int marks = 30;
+            if (marks < 35) {
+                throw new MyException("Marks less than 35");
+            }
+
+            checkFile();
+
+        } catch (ArithmeticException e) {
+            System.out.println("Arithmetic Exception occurred");
+
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Array Index Exception occurred");
+
+        } catch (NullPointerException e) {
+            System.out.println("Null Pointer Exception occurred");
+
+        } catch (MyException e) {
+            System.out.println("User Defined Exception: " + e.getMessage());
+
+        } catch (IOException e) {
+            System.out.println("File Exception occurred");
+
+        } finally {
+            System.out.println("Finally block always executes");
+        }
+    }
+}
