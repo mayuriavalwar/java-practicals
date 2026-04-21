@@ -1,0 +1,50 @@
+// CHARACTER REPETITION:
+
+class Example {
+    public static void main(String args[]) {
+
+        try {
+            // Check arguments
+            if (args.length < 2) {
+                System.out.println("Please give 2 inputs");
+                return;
+            }
+
+            if (args.length > 2) {
+                System.out.println("Extra inputs are ignored");
+            }
+
+            String chInput = args[0];
+            String str = args[1];
+
+            // Check first input is single character
+            if (chInput.length() != 1) {
+                System.out.println("First input must be one character only");
+                return;
+            }
+
+            char ch = chInput.charAt(0);
+
+            // Approach 1: using simple loop
+            String result = "";
+            for (int i = 0; i < str.length(); i++) {
+                result = result + ch;
+            }
+
+            System.out.println("Using loop: " + result);
+
+            // Approach 2: using StringBuilder
+            StringBuilder sb = new StringBuilder();
+
+            for (int i = 0; i < str.length(); i++) {
+                sb.append(ch);
+            }
+
+            System.out.println("Using StringBuilder: " + sb);
+
+        } catch (Exception e) {
+            System.out.println("Some error occurred");
+        }
+    }
+}
+
