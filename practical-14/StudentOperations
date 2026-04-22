@@ -1,0 +1,111 @@
+import java.util.Scanner;
+
+interface StudentOperations {
+
+    void addStudent(String name, int age) throws Exception;
+    void displayStudent();
+
+    // Default method 
+    default void showMessage() {
+        System.out.println("\n📘 Welcome to Student Management System");
+        logDetails();
+    }
+
+    // Static method 
+    static void systemInfo() {
+        System.out.println("ℹ️ This system uses Interface + Abstraction concepts\n");
+    }
+
+    // Private method
+    private void logDetails() {
+        System.out.println("🔍 Logging system activity...");
+    }
+}
+
+// Second interface to create ambiguity
+interface ExtraOperations {
+    default void showMessage() {
+        System.out.println("⚙️ Extra features loaded...");
+    }
+}
+
+// Abstract class 
+abstract class AbstractStudent {
+    String name;
+    int age;
+
+    AbstractStudent(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    // Abstract method (must be implemented)
+    abstract void displayStudent();
+}
+
+// Custom Exception
+class InvalidAgeException extends Exception {
+    InvalidAgeException(String message) {
+        super(message);
+    }
+}
+
+// Main class
+public class MainApp extends AbstractStudent implements StudentOperations, ExtraOperations {
+
+    MainApp(String name, int age) {
+        super(name, age);
+    }
+
+    // Adding student with validation
+    @Override
+    public void addStudent(String name, int age) throws Exception {
+        if (age < 5) {
+            throw new InvalidAgeException("❌ Age should be at least 5!");
+        }
+        this.name = name;
+        this.age = age;
+        System.out.println("✅ Student added successfully!");
+    }
+
+    // Display student details
+    @Override
+    public void displayStudent() {
+        System.out.println("\n👤 Student Details:");
+        System.out.println("Name: " + name);
+        System.out.println("Age: " + age);
+    }
+
+    // Resolving ambiguity between two interfaces
+    @Override
+    public void showMessage() {
+        System.out.println("\n✨ System ready! (Ambiguity resolved here)");
+    }
+
+    // Main method 
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+        MainApp student = new MainApp("", 0);
+
+        try {
+            System.out.print("Enter student name: ");
+            String name = sc.nextLine();
+
+            System.out.print("Enter student age: ");
+            int age = sc.nextInt();
+
+            student.addStudent(name, age);
+            student.displayStudent();
+
+            student.showMessage(); 
+
+            StudentOperations.systemInfo(); 
+
+        } catch (InvalidAgeException e) {
+            System.out.println("⚠️ Custom Error: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("⚠️ Something went wrong. Please try again.");
+        }
+    }
+}
